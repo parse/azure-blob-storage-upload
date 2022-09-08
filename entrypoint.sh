@@ -38,6 +38,11 @@ if [[ -n ${INPUT_EXTRA_ARGS} ]]; then
   EXTRA_ARGS=${INPUT_EXTRA_ARGS}
 fi
 
+METADATA=""
+if [[ -n ${INPUT_METADATA} ]]; then
+  METADATA="--metadata ${INPUT_METADATA}"
+fi
+
 VERB="upload-batch"
 CONTAINER_NAME_FLAG="--destination"
 if [[ -n ${INPUT_SYNC} ]]; then
@@ -53,4 +58,4 @@ fi
 # install the azure cli
 pip install azure-cli${CLI_VERSION}
 
-az storage blob ${VERB} ${CONNECTION_METHOD} --source ${INPUT_SOURCE_DIR} ${CONTAINER_NAME_FLAG} ${INPUT_CONTAINER_NAME} ${ARG_OVERWRITE} ${EXTRA_ARGS}
+az storage blob ${VERB} ${CONNECTION_METHOD} --source ${INPUT_SOURCE_DIR} ${CONTAINER_NAME_FLAG} ${INPUT_CONTAINER_NAME} ${ARG_OVERWRITE} "${METADATA}" ${EXTRA_ARGS}
