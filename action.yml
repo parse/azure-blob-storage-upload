@@ -23,6 +23,9 @@ inputs:
   source_dir:
     description: "The name of the directory you want to upload"
     required: true
+  metadata:
+    description: "Associated metadata that can be passed as key=value"
+    required: false
   extra_args:
     description: "Extra arguments that can be passed to `az storage blob upload-batch|sync`. Useful for passing flags like `--pattern` or `--destination-path`"
     required: false
