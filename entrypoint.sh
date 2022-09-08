@@ -39,10 +39,8 @@ if [[ -n ${INPUT_EXTRA_ARGS} ]]; then
 fi
 
 METADATA=""
-METADATA_FLAG=""
 if [[ -n ${INPUT_METADATA} ]]; then
-  METADATA_FLAG="--metadata"
-  METADATA=${INPUT_METADATA}
+  METADATA="--metadata ${INPUT_METADATA}"
 fi
 
 VERB="upload-batch"
@@ -60,4 +58,6 @@ fi
 # install the azure cli
 pip install azure-cli${CLI_VERSION}
 
-az storage blob ${VERB} ${CONNECTION_METHOD} --source ${INPUT_SOURCE_DIR} ${CONTAINER_NAME_FLAG} ${INPUT_CONTAINER_NAME} ${ARG_OVERWRITE} ${METADATA_FLAG} "${METADATA}" ${EXTRA_ARGS}
+set -x
+az storage blob ${VERB} ${CONNECTION_METHOD} --source ${INPUT_SOURCE_DIR} ${CONTAINER_NAME_FLAG} ${INPUT_CONTAINER_NAME} ${ARG_OVERWRITE} "${METADATA}" ${EXTRA_ARGS}
+set +x
